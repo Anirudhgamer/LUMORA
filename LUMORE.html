@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMORE-Competition Ready</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for clean visuals -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000; /* Violet 600 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1f2937; /* Gray 800 */
+            
+            /* --- UPDATED: ADDING SUBTLE BACKGROUND IMAGE --- */
+            background-image 
+            background-size: cover;
+            background-attachment: fixed; /* Ensures the background stays fixed while content scrolls */
+            background-repeat: no-repeat;
+            background-color: #fff8f8; /* Fallback color */
+            background-blend-mode: luminosity; /* Blends the image subtly with the background color */
+            /* --- END BACKGROUND IMAGE STYLE --- */
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, #8780b1, #ffffff);
+            -webkit-background-clip: text ;
+            -webkit-text-fill-color: color(srgb rgb(152, 196, 48) rgb(192, 52, 52) blue);
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+        }
+        /* Custom styles for the process flow line */
+        .process-step {
+            position: relative;
+            z-index: 10;
+        }
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: calc(50% + 2rem);
+            width: calc(50% - 4rem);
+            height: 2px;
+            background-color: #0055ff; /* Gray 200 */
+            z-index: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        .process-step:hover .process-icon-container {
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3); /* Violet shadow */
+        }
+        .process-step:last-child::after {
+            display: none;
+        }
+        /* Custom checkmark styles for the feature list */
+        .feature-item {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: #e81414; /* Gray 700 */
+        }
+        .feature-item svg {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Animation for the floating AI visual */
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(0, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-violet': '#7c3aed',
+                        'secondary-dark': '#111827',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Header / Navigation Bar (Enhanced Sticky Effect) -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-lg/50 transition-shadow duration-300 border-b border-gray-100/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-primary-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="font-extrabold text-xl text-gray-900">Agency.<span class="text-primary-violet">io</span></span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-10 text-gray-600 font-medium">
+                <a href="#services" class="hover:text-primary-violet transition duration-150 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-violet after:transition-all after:duration-300 hover:after:w-full">Services</a>
+                <a href="#ai-power" class="hover:text-primary-violet transition duration-150 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-violet after:transition-all after:duration-300 hover:after:w-full">AI Edge</a>
+                <a href="#process" class="hover:text-primary-violet transition duration-150 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-violet after:transition-all after:duration-300 hover:after:w-full">Process</a>
+                <a href="#testimonials" class="hover:text-primary-violet transition duration-150 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-violet after:transition-all after:duration-300 hover:after:w-full">Clients</a>
+            </nav>
+            
+            <!-- Book Call Button -->
+            <a href="#contact" class="px-5 py-2 bg-primary-violet text-white font-semibold rounded-full hover:bg-violet-700 transition duration-300 shadow-xl shadow-violet-500/50 transform hover:scale-105">
+                Book a Free Audit
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero Section -->
+        <section id="hero" class="py-20 md:py-32 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <!-- Badge -->
+            <div class="inline-flex items-center bg-violet-50 text-primary-violet px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-violet-200 shadow-sm animate-pulse-slow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.76 2.75L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.76-2.75L21 16"/><path d="M21 21v-5h-5"/></svg>
+                Limited slots for next-gen projects. Apply today.
+            </div>
+
+            <!-- Title - Revised Content -->
+            <h1 class="hero-title font-extrabold text-gray-900 mb-6 tracking-tight" data-scroll-speed="1.1">
+                Achieve <span class="text-gradient">Exponential</span> Growth with our 
+                <span class="text-gradient">diff</span>erentiated <span class="text-gradient">timeline</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10" data-scroll-speed="1.05">
+                We empower visionary brands and competitive startups with **predictive AI**, **bleeding-edge code**, and a **results-first** framework designed for market dominance.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex justify-center space-x-4 mb-20" data-scroll-speed="1.0">
+                <a href="#contact" class="px-8 py-4 bg-primary-violet text-white font-bold rounded-xl hover:bg-violet-700 transition duration-300 shadow-2xl shadow-violet-500/50 transform hover:-translate-y-1">
+                    Launch Your Project Now
+                </a>
+                <button class="watch-reel-btn px-8 py-4 text-gray-700 font-bold rounded-xl border-2 border-gray-200 hover:border-primary-violet hover:text-primary-violet transition duration-300 flex items-center space-x-2 shadow-inner hover:shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rotating-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <span>Watch Case Reel</span>
+                </button>
+            </div>
+
+            <!-- Trusted By Logos -->
+            <div class="mt-16 pt-10 border-t border-gray-200">
+                <p class="text-sm font-extrabold text-gray-400 uppercase tracking-widest mb-6">Partners for Market Leaders</p>
+                <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-gray-400 text-lg font-bold">
+                    <span>Alpha Corp</span>
+                    <span>Zenith Labs</span>
+                    <span>DataStream</span>
+                    <span>Innovate+</span>
+                    <span>Global Fintech</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Core Services - Stop wrestling with legacy codebases (Upgraded Features) -->
+        <section id="services" class="py-20 md:py-28 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Content -->
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">
+                        Stop wrestling with <br class="hidden sm:inline">
+                        <span class="text-primary-violet">technical debt & slow delivery</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8">
+                        We don't just build, we architect for tomorrow. Our framework eliminates technical debt by design, ensuring zero friction growth and a future-proof foundation.
+                    </p>
+                    
+                    <!-- Feature List -->
+                    <ul class="space-y-5">
+                        <li class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Hyper-Speed Deployment: Zero-downtime CI/CD pipelines.</span>
+                        </li>
+                        <li class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Predictive Maintenance:AI models flag risk before it becomes an issue.</span>
+                        </li>
+                        <li class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Guaranteed Scalability: Designed to handle 100x user growth.</span>
+                        </li>
+                        <li class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>508 & WCAG Compliance:Accessibility built-in, not bolted on.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Right Illustration/Visual (Enhanced Bar Chart) -->
+                <div class="bg-violet-50 rounded-3xl p-8 shadow-2xl border-4 border-primary-violet/20 relative overflow-hidden h-96 flex items-center justify-center">
+                    <div class="w-full max-w-sm h-full flex items-center justify-center">
+                        <svg class="w-4/5 h-4/5 text-primary-violet/80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background for the chart area -->
+                            <rect x="0" y="0" width="100" height="100" fill="none"/>
+                            <!-- Y-axis -->
+                            <line x1="10" y1="10" x2="10" y2="90" stroke="#a78bfa" stroke-width="2"/>
+                            <!-- X-axis -->
+                            <line x1="10" y1="90" x2="90" y2="90" stroke="#a78bfa" stroke-width="2"/>
+                            <!-- Bars (animated look) -->
+                            <rect x="15" y="70" width="15" height="20" fill="currentColor" rx="3" style="animation: bar1 2s infinite alternate;"/>
+                            <rect x="35" y="50" width="15" height="40" fill="currentColor" rx="3" style="animation: bar2 2s infinite alternate 0.2s;"/>
+                            <rect x="55" y="30" width="15" height="60" fill="currentColor" rx="3" style="animation: bar3 2s infinite alternate 0.4s;"/>
+                            <rect x="75" y="15" width="15" height="75" fill="currentColor" rx="3" style="animation: bar4 2s infinite alternate 0.6s;"/>
+                            
+                            <style>
+                                @keyframes bar1 { from { height: 20px; transform: translateY(0px); } to { height: 40px; transform: translateY(-20px); } }
+                                @keyframes bar2 { from { height: 40px; transform: translateY(0px); } to { height: 60px; transform: translateY(-20px); } }
+                                @keyframes bar3 { from { height: 60px; transform: translateY(0px); } to { height: 80px; transform: translateY(-20px); } }
+                                @keyframes bar4 { from { height: 75px; transform: translateY(0px); } to { height: 65px; transform: translateY(10px); } }
+                            </style>
+                        </svg>
+                    </div>
+                    <!-- Added gradient effect for visual depth -->
+                    <div class="absolute inset-0 opacity-10 bg-gradient-to-tr from-violet-300 to-white pointer-events-none rounded-3xl"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: The AI Advantage (New Competitive Feature) -->
+        <section id="ai-power" class="py-20 md:py-28 bg-gray-100 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-sm font-bold text-primary-violet uppercase tracking-widest">The Competitive Edge</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3">
+                        **Predictive Intelligence** in Every Sprint
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+                        We integrate proprietary AI models to inform design choices, optimize conversion paths, and predict market shifts—guaranteeing ROI alignment.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- AI Feature 1: Design -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-primary-violet">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-primary-violet mb-4 float-animation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">AI-Driven UX Testing</h3>
+                        <p class="text-gray-600 text-sm">
+                            Automated heat mapping and user flow analysis predict friction points before launch.
+                        </p>
+                    </div>
+                    <!-- AI Feature 2: Development -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-violet-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-violet-500 mb-4 float-animation" style="animation-delay: 0.5s;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.42 2a1.8 1.8 0 0 1 1.7 1.3L13.5 7h4.96a1.9 1.9 0 0 1 1.83 2.1l-.8 8.16A2 2 0 0 1 17.5 20H6.5a2 2 0 0 1-1.99-1.84l-.8-8.16a1.9 1.9 0 0 1 1.83-2.1H10l1.38-3.7A1.8 1.8 0 0 1 12 4a1.8 1.8 0 0 1 1.7-1.3zM12 2v20"/></svg>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Code Quality Audit (On-Demand)</h3>
+                        <p class="text-gray-600 text-sm">
+                            Real-time AI review of all committed code for security vulnerabilities and performance bottlenecks.
+                        </p>
+                    </div>
+                    <!-- AI Feature 3: Strategy -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-600 mb-4 float-animation" style="animation-delay: 1s;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 0 0 20 15.3 15.3 0 0 0 0-20zM2.5 12h19"/></svg>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Market & Trend Prediction</h3>
+                        <p class="text-gray-600 text-sm">
+                            Proprietary algorithms model competitor moves to keep your product always one step ahead.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Tailored for every stage -->
+        <section id="work" class="py-20 md:py-28 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-3">Your Partner at Every Milestone</h2>
+                <p class="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-16">
+                    From initial concept validation to massive user scaling, our specialized workflows adapt perfectly to your current business phase.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Validation/MVP Card -->
+                    <div class="bg-gray-50 p-8 md:p-10 rounded-3xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300">
+                        <div class="w-14 h-14 flex items-center justify-center bg-green-100 rounded-xl mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Concept Validation & MVP</h3>
+                        <p class="text-gray-600 mb-6">
+                            De-risk your investment. Rapid prototype development, user testing, and a market-ready MVP launch in 8 weeks or less.
+                        </p>
+                        <a href="#" class="text-primary-violet font-semibold flex items-center space-x-2 group">
+                            <span>Explore MVP Track</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    
+                    <!-- Scaling/Enterprise Card -->
+                    <div class="bg-gray-50 p-8 md:p-10 rounded-3xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary-violet/10 rounded-xl mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-primary-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M7 9l5 5 5-5M12 12V4"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Hyper-Scaling & Enterprise Modernization</h3>
+                        <p class="text-gray-600 mb-6">
+                            Migrate legacy systems, integrate complex APIs, and scale architecture to handle global traffic and compliance.
+                        </p>
+                        <a href="#" class="text-primary-violet font-semibold flex items-center space-x-2 group">
+                            <span>View Enterprise Solutions</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: How we work (Process) - Enhanced Visuals -->
+        <section id="process" class="py-20 md:py-28 bg-gray-50 border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-16">The **3X** Acceleration Framework</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-8 relative">
+                    
+                    <!-- Step 1: Discover & Design -->
+                    <div class="process-step relative flex flex-col items-center md:items-start text-center md:text-left z-10 group">
+                        <div class="process-icon-container w-16 h-16 flex items-center justify-center bg-white rounded-full border-4 border-primary-violet/20 mb-4 transition duration-300 shadow-md">
+                            <span class="text-xl font-extrabold text-primary-violet">01</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2 group-hover:text-primary-violet transition">Deep Discovery & Blueprint</h3>
+                        <p class="text-gray-600 max-w-xs text-sm">
+                            We use data-driven insights to define strategy, scope, and create a pixel-perfect design system.
+                        </p>
+                        
+                    </div>
+
+                    <!-- Step 2: Build & Iterate -->
+                    <div class="process-step relative flex flex-col items-center md:items-start text-center md:text-left z-10 group">
+                        <div class="process-icon-container w-16 h-16 flex items-center justify-center bg-white rounded-full border-4 border-primary-violet/20 mb-4 transition duration-300 shadow-md">
+                            <span class="text-xl font-extrabold text-primary-violet">02</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2 group-hover:text-primary-violet transition">Rapid Build & CI/CD</h3>
+                        <p class="text-gray-600 max-w-xs text-sm">
+                            Agile sprints, rigorous testing, and continuous integration ensure fast, bug-free development cycles.
+                        </p>
+                        
+                    </div>
+
+                    <!-- Step 3: Optimize & Scale -->
+                    <div class="relative flex flex-col items-center md:items-start text-center md:text-left z-10 group">
+                        <div class="process-icon-container w-16 h-16 flex items-center justify-center bg-white rounded-full border-4 border-primary-violet/20 mb-4 transition duration-300 shadow-md">
+                            <span class="text-xl font-extrabold text-primary-violet">03</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2 group-hover:text-primary-violet transition">Launch, Optimize & Grow</h3>
+                        <p class="text-gray-600 max-w-xs text-sm">
+                            Post-launch monitoring, performance tuning, and AI-powered recommendations for sustained growth.
+                        </p>
+                    </div>
+                    
+                    <!-- Horizontal Line Connector (Enhanced Look) -->
+                    <div class="absolute inset-0 top-1/4 h-0.5 bg-gray-200 hidden md:block z-0">
+                         <!-- Small indicator dots on the line -->
+                        <div class="absolute top-1/2 left-[calc(100%/3)] w-3 h-3 -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-primary-violet rounded-full shadow-md"></div>
+                        <div class="absolute top-1/2 left-[calc(200%/3)] w-3 h-3 -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-primary-violet rounded-full shadow-md"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: Why choose us? (Comparison Table - More Aggressive Copy) -->
+        <section id="pricing" class="py-20 md:py-28 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-16">The **Agency.io** ROI Difference</h2>
+
+                <div class="bg-gray-50 rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider w-1/4">
+                                    Metric
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider w-1/4">
+                                    Traditional Agencies
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider w-1/4">
+                                    Single Freelancers
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-extrabold uppercase tracking-wider w-1/4 bg-primary-violet text-white">
+                                    LUMORE(The Future)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <!-- Delivery Speed Row -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-gray-900">
+                                    Launch Timeline
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-medium">
+                                    6+ Months (Bloated Process)
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-medium">
+                                    Unpredictable (Burnout Risk)
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-white bg-primary-violet/90 rounded-r-lg">
+                                    **8-10 Week Accelerated Ship**
+                                </td>
+                            </tr>
+                            <!-- Quality Control Row -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-gray-900">
+                                    Technical Debt
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-medium">
+                                    High (Legacy Code)
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-medium">
+                                    Inherent Risk
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-primary-violet bg-primary-violet/5">
+                                    **Near Zero (AI-Audited)**
+                                </td>
+                            </tr>
+                            <!-- Scalability Row -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-gray-900">
+                                    Pricing Model
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-medium">
+                                    Fixed & Inflexible Retainer
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-medium">
+                                    Hourly & Unscoped
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-extrabold text-primary-violet bg-primary-violet/5">
+                                    **Value-Based Fixed Price**
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 7: Client Testimonials (New Social Proof Section) -->
+        <section id="testimonials" class="py-20 md:py-28 bg-gray-100 border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-16">What Our **Market Leaders** Say</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border border-gray-200 transform hover:-translate-y-1 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary-violet opacity-50 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12c0 1.76-2 3-4 3s-4-1.24-4-3 2-3 4-3 4 1.24 4 3zM21 12c0 1.76-2 3-4 3s-4-1.24-4-3 2-3 4-3 4 1.24 4 3z"/></svg>
+                        <p class="text-lg text-gray-700 italic mb-6">
+                            "They didn't just build our product; they future-proofed our business. We saw a 40% reduction in cloud costs and zero major incidents in the first year."
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/9333ea/ffffff?text=JM" alt="Client Avatar" class="w-10 h-10 rounded-full mr-4 border-2 border-primary-violet">
+                            <div>
+                                <p class="font-bold text-gray-900">Jaya Menon</p>
+                                <p class="text-sm text-gray-500">CTO, AlphaStream Analytics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border border-gray-200 transform hover:-translate-y-1 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary-violet opacity-50 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12c0 1.76-2 3-4 3s-4-1.24-4-3 2-3 4-3 4 1.24 4 3zM21 12c0 1.76-2 3-4 3s-4-1.24-4-3 2-3 4-3 4 1.24 4 3z"/></svg>
+                        <p class="text-lg text-gray-700 italic mb-6">
+                            "The differentiated timeline was a game-changer. We launched our core MVP while our competitor was still in their design phase. Unbeatable speed."
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/7c3aed/ffffff?text=SK" alt="Client Avatar" class="w-10 h-10 rounded-full mr-4 border-2 border-primary-violet">
+                            <div>
+                                <p class="font-bold text-gray-900">Siddharth K.</p>
+                                <p class="text-sm text-gray-500">Founder, Zenith Fintech</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border border-gray-200 transform hover:-translate-y-1 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-primary-violet opacity-50 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12c0 1.76-2 3-4 3s-4-1.24-4-3 2-3 4-3 4 1.24 4 3zM21 12c0 1.76-2 3-4 3s-4-1.24-4-3 2-3 4-3 4 1.24 4 3z"/></svg>
+                        <p class="text-lg text-gray-700 italic mb-6">
+                            "The integrated AI audit saved us from a costly rework. The level of engineering maturity here is significantly higher than any previous agency we hired."
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/a855f7/ffffff?text=AR" alt="Client Avatar" class="w-10 h-10 rounded-full mr-4 border-2 border-primary-violet">
+                            <div>
+                                <p class="font-bold text-gray-900">Ananya R.</p>
+                                <p class="text-sm text-gray-500">Director of Digital, Global Tech D</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 8: Footer CTA - Ready to build the future? -->
+        <section id="contact" class="bg-secondary-dark py-20 md:py-32">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">
+                    Ready to **Dominate** the Market?
+                </h2>
+                <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                    Take the first step towards exponential growth. Book your confidential strategy session today.
+                </p>
+                <a href="#" class="px-10 py-4 bg-primary-violet text-white font-bold rounded-xl hover:bg-violet-700 transition duration-300 shadow-xl shadow-violet-500/40 transform hover:scale-105 inline-flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 19H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h4"/></svg>
+                    <span>Request Strategy Call</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-dark border-t border-gray-800 text-gray-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-10 border-b border-gray-800 pb-10">
+                
+                <!-- Logo & Description Column -->
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-primary-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <span class="font-extrabold text-xl text-white">Agency.<span class="text-primary-violet">io</span></span>
+                    </div>
+                    <p class="text-sm">
+                        Building the next generation of digital products with speed, scale, and intelligence.
+                    </p>
+                </div>
+
+                <!-- Company Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-primary-violet transition duration-150">Manifesto</a></li>
+                        <li><a href="#" class="hover:text-primary-violet transition duration-150">Careers (10 spots)</a></li>
+                        <li><a href="#" class="hover:text-primary-violet transition duration-150">Insights Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-primary-violet transition duration-150">AI Integration Guide</a></li>
+                        <li><a href="#" class="hover:text-primary-violet transition duration-150">Client Portal</a></li>
+                        <li><a href="#" class="hover:text-primary-violet transition duration-150">Performance Data</a></li>
+                    </ul>
+                </div>
+
+                <!-- Stay Included / Newsletter -->
+                <div class="col-span-2 md:col-span-2">
+                    <h4 class="text-white font-semibold mb-4">Get the AI Edge Newsletter</h4>
+                    <p class="text-sm mb-4">
+                        Exclusive weekly insights on growth hacking and AI integration strategies.
+                    </p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your corporate email address" class="w-full px-4 py-2 rounded-l-lg focus:outline-none text-gray-800" aria-label="Email subscription">
+                        <button class="bg-primary-violet p-3 rounded-r-lg hover:bg-violet-700 transition duration-300 transform hover:scale-105">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-10 text-center text-sm text-gray-600">
+                &copy; LUMORE- Competition Accelerate to the Future.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for icon rendering and smooth scrolling/interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Simple smooth scroll function
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Parallax Scroll Effect for Hero Section (subtle visual edge)
+            const heroSection = document.getElementById('hero');
+            const heroSubtitle = heroSection.querySelector('p[data-scroll-speed]');
+            const heroButtons = heroSection.querySelector('div[data-scroll-speed]');
+
+            const handleScroll = () => {
+                const scrollY = window.scrollY;
+                
+                // Subtle upward movement for the subtitle (slower than the title implied movement)
+                if (heroSubtitle) {
+                    heroSubtitle.style.transform = `translateY(${scrollY * 0.1}px)`;
+                }
+                
+                // Even slower movement for the buttons
+                if (heroButtons) {
+                    heroButtons.style.transform = `translateY(${scrollY * 0.05}px)`;
+                }
+            };
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial call
+        });
+    </script>
+</body>
+</html>
